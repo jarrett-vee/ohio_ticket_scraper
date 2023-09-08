@@ -22,6 +22,7 @@ def fetch_case_details(case_num, record_num, num_cases, rnd_value):
     return soup
 
 # Set the URL and headers
+# note that the city can be changed. Replace "Brecksville" with whatever option is supported on ohioticketpayments.com
 url = 'https://www.ohioticketpayments.com/Brecksville/MCOnlineServices.php'
 headers = {
     'Accept': '*/*',
@@ -101,7 +102,6 @@ with open(csv_filename, mode="w", newline="", encoding="utf-8") as csv_file:
                 if officer_name_td and ticket_no_td:
                     officer_name = officer_name_td.text.strip()
                     ticket_no = ticket_no_td.text.strip()
-                # ... [rest of officer details extraction]
                 if officer_name and officer_name not in officers_in_case:
                     csv_writer.writerow([base_data['DateOfOffense'], officer_name, ticket_no, location])  # Added location
                     officers_in_case.add(officer_name)
