@@ -43,7 +43,7 @@ end_date = datetime.strptime("2023-01-05", "%Y-%m-%d")
 print("Starting data collection from:", start_date.strftime("%Y-%m-%d"), "to:", end_date.strftime("%Y-%m-%d"))
 
 # Initialize the CSV file and timer
-csv_filename = "case_data1.csv"
+csv_filename = "case_data.csv"
 start_time = time.time()
 
 # Initialize a dictionary to store officer appearances
@@ -89,16 +89,16 @@ with open(csv_filename, mode="w", newline="", encoding="utf-8") as csv_file:
             case_soup = fetch_case_details(case_num, record_num, num_cases, rnd_value)
             
             # Extracting Location
-            location_row = case_soup.find('td', text='Location: ')
+            location_row = case_soup.find('td', string='Location: ')
             location_data_td = location_row.find_next_sibling('td', class_='OffenseData') if location_row else None
             location = location_data_td.text.strip() if location_data_td else None
             
-            officer_rows = case_soup.find_all('td', text='Officer:')
+            officer_rows = case_soup.find_all('td', string='Officer:')
             officers_in_case = set()
 
             for officer_row in officer_rows:
                 officer_name_td = officer_row.find_next_sibling('td', class_='OffenseData')
-                ticket_no_td = officer_row.find_next('td', text='Ticket No:').find_next_sibling('td', class_='OffenseData')
+                ticket_no_td = officer_row.find_next('td', string='Ticket No:').find_next_sibling('td', class_='OffenseData')
                 if officer_name_td and ticket_no_td:
                     officer_name = officer_name_td.text.strip()
                     ticket_no = ticket_no_td.text.strip()
