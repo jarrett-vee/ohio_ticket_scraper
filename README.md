@@ -6,14 +6,14 @@ Features:
 
 Scrapes the data based on a customizable date range.
 Saves the extracted data into a CSV file.
-Prints out the number of times an officer's name appeared on the console.
+Prints out the number of times an officer's name and the defendant's name (top three highest appearers) appeared on the console.
 Supports changing the city for which the data is scraped (default is "Brecksville").
 Prerequisites
 Ensure you have the following Python libraries installed:
 
 Install them via pip:
 ```
-pip install requests beautifulsoup4
+pip install requests beautifulsoup4 pandas
 ```
 
 How to Use:
